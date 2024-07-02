@@ -1,0 +1,8 @@
+nest g module [name]
+nest g controller [name]
+nest g service [name]
+
+---
+
+nest g resource [name]
+nest g resource [name] --dry-run
