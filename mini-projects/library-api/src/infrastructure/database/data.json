@@ -1,0 +1,69 @@
+{
+    "authors": [
+        {
+            "id": "5ca116bc-2b7a-52e0-a7ba-880abef936c0",
+            "name": "J.K. Rowling",
+            "books": [
+                "11490900-577e-53ff-a776-83bd818d007b",
+                "8f5985ae-274e-5977-82a1-8ca60bca03d9"
+            ]
+        },
+        {
+            "id": "da5a20c0-1882-5b5a-ac96-77e4ef4a56de",
+            "name": "J.R.R. Tolkien",
+            "books": [
+                "2599d4f1-56cd-5968-aec0-548f9e612356",
+                "e068303c-6559-5de1-8bd0-d00d28de5b43"
+            ]
+        },
+        {
+            "id": "627012a8-11f0-534c-ba7b-b4e57ba29a5f",
+            "name": "George R.R. Martin",
+            "books": [
+                "b5b70b08-e68f-5b46-983a-753f57bdfe70",
+                "e068303c-6559-5de1-8bd0-d00d28de5b43"
+            ]
+        },
+        {
+            "id": "d1f205a4-b33b-56e8-bbcd-c5e5ff88a39d",
+            "name": "Neil Gaiman",
+            "books": ["e068303c-6559-5de1-8bd0-d00d28de5b43"]
+        }
+    ],
+    "books": [
+        {
+            "id": "11490900-577e-53ff-a776-83bd818d007b",
+            "title": "Harry Potter and the Philosopher's Stone",
+            "published_year": 1997,
+            "authors": ["5ca116bc-2b7a-52e0-a7ba-880abef936c0"]
+        },
+        {
+            "id": "2599d4f1-56cd-5968-aec0-548f9e612356",
+            "title": "The Hobbit",
+            "published_year": 1937,
+            "authors": ["da5a20c0-1882-5b5a-ac96-77e4ef4a56de"]
+        },
+        {
+            "id": "b5b70b08-e68f-5b46-983a-753f57bdfe70",
+            "title": "A Game of Thrones",
+            "published_year": 1996,
+            "authors": ["627012a8-11f0-534c-ba7b-b4e57ba29a5f"]
+        },
+        {
+            "id": "8f5985ae-274e-5977-82a1-8ca60bca03d9",
+            "title": "Harry Potter and the Chamber of Secrets",
+            "published_year": 1998,
+            "authors": ["5ca116bc-2b7a-52e0-a7ba-880abef936c0"]
+        },
+        {
+            "id": "e068303c-6559-5de1-8bd0-d00d28de5b43",
+            "title": "Good Omens",
+            "published_year": 1990,
+            "authors": [
+                "da5a20c0-1882-5b5a-ac96-77e4ef4a56de",
+                "627012a8-11f0-534c-ba7b-b4e57ba29a5f",
+                "d1f205a4-b33b-56e8-bbcd-c5e5ff88a39d"
+            ]
+        }
+    ]
+}

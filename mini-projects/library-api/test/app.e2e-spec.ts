@@ -1,0 +1,1 @@
+/Users/ray/Documents/Coding Journey/Projects/Web Dev/all-things-nest/library-api/.prettierrc
