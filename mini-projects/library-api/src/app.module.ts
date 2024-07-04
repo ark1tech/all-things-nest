@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { BooksModule } from './infrastructure/books/books.module';
 import { AuthorsModule } from './infrastructure/authors/authors.module';
-import { DatabaseService } from './infrastructure/database/database.service';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
-    imports: [BooksModule, AuthorsModule],
-    providers: [DatabaseService]
+    imports: [BooksModule, AuthorsModule, DatabaseModule]
 })
 export class AppModule {}

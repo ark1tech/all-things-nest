@@ -1,15 +1,16 @@
+import { ILibrary } from '../../database/interfaces/library.interface';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { IAuthor, Authors } from 'src/domain/model/authors';
-import * as authorData from './data/authors.json';
-import { CreateAuthorDto, UpdateAuthorDto } from './authors.dto';
-import { hash } from 'src/domain/utils/hasher';
+import { IAuthor } from 'src/domain/model/authors';
+import { CreateAuthorDto, UpdateAuthorDto } from './dto/authors.dto';
+import { hashName } from 'src/domain/utils/hasher';
+import { DatabaseService } from 'src/database/database.service';
 
 @Injectable()
 export class AuthorsService {
-    private authors: Authors = authorData;
+    constructor(private databaseService: DatabaseService) {}
 
-    getAllAuthors() {
-        return this.authors;
+    getAllAuthors(): ILibrary {
+        return this.databaseService.library;
     }
 
     getAuthor(id: string) {
@@ -22,7 +23,7 @@ export class AuthorsService {
 
     createAuthor(createAuthorDto: CreateAuthorDto) {
         const newAuthor = {
-            id: hash(createAuthorDto.name),
+            id: hashName(createAuthorDto.name),
             ...createAuthorDto
         };
         this.authors.push(newAuthor);

@@ -1,5 +1,5 @@
 {
-    "authors": [
+    "authorList": [
         {
             "id": "5ca116bc-2b7a-52e0-a7ba-880abef936c0",
             "name": "J.K. Rowling",
@@ -30,7 +30,7 @@
             "books": ["e068303c-6559-5de1-8bd0-d00d28de5b43"]
         }
     ],
-    "books": [
+    "bookList": [
         {
             "id": "11490900-577e-53ff-a776-83bd818d007b",
             "title": "Harry Potter and the Philosopher's Stone",
