@@ -1,0 +1,119 @@
+[
+    {
+        "id": "1",
+        "name": "Leonardo",
+        "nickname": "Leo",
+        "species": "Mutant Turtle",
+        "gender": "Male",
+        "weapons": ["Twin Katanas"],
+        "color": "Blue",
+        "role": "Leader",
+        "skills": {
+            "strength": 85,
+            "speed": 70,
+            "intelligence": 90,
+            "fighting": 95
+        },
+        "personality": ["Disciplined", "Courageous", "Responsible"]
+    },
+    {
+        "id": "2",
+        "name": "Raphael",
+        "nickname": "Raph",
+        "species": "Mutant Turtle",
+        "gender": "Male",
+        "weapons": ["Twin Sai"],
+        "color": "Red",
+        "role": "Hot-Headed",
+        "skills": {
+            "strength": 95,
+            "speed": 75,
+            "intelligence": 70,
+            "fighting": 90
+        },
+        "personality": ["Aggressive", "Loyal", "Rebellious"]
+    },
+    {
+        "id": "3",
+        "name": "Donatello",
+        "nickname": "Donnie",
+        "species": "Mutant Turtle",
+        "gender": "Male",
+        "weapons": ["Bo Staff"],
+        "color": "Purple",
+        "role": "Techie",
+        "skills": {
+            "strength": 70,
+            "speed": 65,
+            "intelligence": 100,
+            "fighting": 80
+        },
+        "personality": ["Intelligent", "Inventive", "Calm"]
+    },
+    {
+        "id": "4",
+        "name": "Michelangelo",
+        "nickname": "Mikey",
+        "species": "Mutant Turtle",
+        "gender": "Male",
+        "weapons": ["Nunchakus"],
+        "color": "Orange",
+        "role": "Party Dude",
+        "skills": {
+            "strength": 80,
+            "speed": 85,
+            "intelligence": 60,
+            "fighting": 75
+        },
+        "personality": ["Fun-loving", "Cheerful", "Easy-going"]
+    },
+    {
+        "id": "5",
+        "name": "Splinter",
+        "nickname": "Master Splinter",
+        "species": "Mutant Rat",
+        "gender": "Male",
+        "weapons": ["Walking Stick"],
+        "color": "Brown",
+        "role": "Sensei",
+        "skills": {
+            "strength": 80,
+            "speed": 70,
+            "intelligence": 95,
+            "fighting": 100
+        },
+        "personality": ["Wise", "Patient", "Protective"]
+    },
+    {
+        "id": "6",
+        "name": "April O'Neil",
+        "species": "Human",
+        "gender": "Female",
+        "weapons": ["None"],
+        "color": "Yellow",
+        "role": "Friend",
+        "skills": {
+            "strength": 60,
+            "speed": 65,
+            "intelligence": 85,
+            "fighting": 55
+        },
+        "personality": ["Brave", "Curious", "Resourceful"]
+    },
+    {
+        "id": "7",
+        "name": "Casey Jones",
+        "species": "Human",
+        "gender": "Male",
+        "weapons": ["Sports Gear"],
+        "color": "White",
+        "role": "Vigilante",
+        "skills": {
+            "strength": 90,
+            "speed": 80,
+            "intelligence": 70,
+            "fighting": 85
+        },
+        "personality": ["Reckless", "Determined", "Loyal"]
+    }
+]
