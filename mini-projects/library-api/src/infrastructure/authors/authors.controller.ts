@@ -1,35 +1,40 @@
-import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
+import {
+    Controller,
+    Get,
+    Post,
+    Put,
+    Delete,
+    Param,
+    Body
+} from '@nestjs/common';
 import { AuthorsService } from './authors.service';
 
 @Controller('authors')
 export class AuthorsController {
-    constructor (private authorsService: AuthorsService) {}
+    constructor(private authorsService: AuthorsService) {}
 
     @Get()
-    getAllAuthors(){
+    getAllAuthors() {
         return this.authorsService.getAllAuthors();
     }
 
     @Get(':id')
-    getAuthor(@Param('id') id:string){
+    getAuthor(@Param('id') id: string) {
         return this.authorsService.getAuthor(id);
     }
 
     @Post()
-    createAuthor(
-        @Body('name') name:string
-    ){
-        return this.authorsService.createAuthor({name});
+    createAuthor(@Body('name') name: string) {
+        return this.authorsService.createAuthor({ name });
     }
 
     @Put()
-    updateAuthor(){
+    updateAuthor() {
         return this.authorsService.getAllAuthors();
     }
 
     @Delete()
-    deleteAuthor(){
+    deleteAuthor() {
         return this.authorsService.getAllAuthors();
     }
-
 }

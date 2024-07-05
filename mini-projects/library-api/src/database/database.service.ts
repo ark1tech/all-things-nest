@@ -1,9 +1,31 @@
-import { ILibrary } from './interfaces/library.interface';
+import { IBook } from './../infrastructure/books/interfaces/book.interface';
+import { IAuthor } from './../infrastructure/authors/interfaces/author.interface';
 import { Injectable } from '@nestjs/common';
+import { CreateAuthorDto } from 'src/infrastructure/authors/dto/authors.dto';
+import { CreateBookDto } from 'src/infrastructure/books/dto/books.dto';
+import { hashName } from 'src/utils/hasher';
 
-import * as libraryData from './data.json';
+import * as libraryData from './data/data.json';
 
 @Injectable()
 export class DatabaseService {
-    public library: ILibrary = libraryData;
+    private authors: IAuthor[] = libraryData.authorList;
+    private books: IBook[] = libraryData.bookList;
+
+    getAllAuthors(): IAuthor[] {
+        return this.authors;
+    }
+
+    getAuthor(id: string) {
+        return this.authors.find((author: IAuthor) => author.id === id);
+    }
+
+    createAuthor(createAuthorDto: CreateAuthorDto) {
+        const newAuthor = {
+            id: hashName(createAuthorDto.name),
+            ...createAuthorDto
+        };
+        this.authors.push(newAuthor);
+        return newAuthor;
+    }
 }
