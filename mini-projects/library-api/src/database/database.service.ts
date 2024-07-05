@@ -20,7 +20,11 @@ export class DatabaseService {
         return this.authors.find((author: IAuthor) => author.id === id);
     }
 
+    // Updates Books memories
+    // Books input should be separated by commas
     createAuthor(createAuthorDto: CreateAuthorDto) {
+        const { nameInput, bookInput } = createAuthorDto;
+
         const newAuthor = {
             id: hashName(createAuthorDto.name),
             ...createAuthorDto

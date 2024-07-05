@@ -6,4 +6,3 @@ export interface IAuthor {
     books: IBook['id'][];
 }
 
-// export type Authors = IAuthor[]
