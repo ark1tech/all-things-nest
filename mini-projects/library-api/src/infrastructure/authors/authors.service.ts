@@ -1,12 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { ILibrary } from '../../database/interfaces/library.interface';
-import { IAuthor } from './interfaces/author.interface';
-
-import { CreateAuthorDto, UpdateAuthorDto } from './dto/authors.dto';
-
-import { hashName } from 'src/domain/utils/hasher';
-
 import { DatabaseService } from 'src/database/database.service';
 
 @Injectable()

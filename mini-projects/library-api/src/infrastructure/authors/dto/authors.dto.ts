@@ -12,7 +12,7 @@ export class CreateAuthorDto {
         message:
             'For books more than one, use the delimiter ;; to separate them. Check your input ($value) again.'
     })
-    name: string;
+    nameInput: string;
 
     @IsNotEmpty({
         message: 'Book/s cannot be empty'
@@ -20,10 +20,10 @@ export class CreateAuthorDto {
     @IsString({
         message: 'Book/s has to be a string. Check your input ($value) again.'
     })
-    books: string;
+    booksInput: string;
 }
 
 export class UpdateAuthorDto {
-    name?: string;
-    books?: string;
+    nameInput?: string;
+    booksInput?: string;
 }
