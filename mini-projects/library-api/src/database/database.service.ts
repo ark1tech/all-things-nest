@@ -47,13 +47,15 @@ export class DatabaseService {
     }
 
     updateAuthor(id: string, updateAuthorDto: UpdateAuthorDto) {
-        const { nameInput, contactInput, booksInput } = updateAuthorDto;
+        const { name, contact, books } = updateAuthorDto;
 
         this.authors = this.authors.map((author) => {
             if (author.id === id) {
-                nameInput ? (author.name = nameInput) : '';
-                booksInput ? (author.books = booksInput) : '';
+                name ? (author.name = name) : '';
+                contact ? (author.contact = contact) : '';
+                books ? (author.books = books) : '';
             }
+            return author;
         });
     }
 

@@ -1,6 +1,6 @@
-import { ILibrary } from './../../dist/domain/model/library.d';
-import path from 'path';
-import fs from 'fs';
+import { ILibrary } from './../database/interfaces/library.interface';
+import * as path from 'node:path';
+import * as fs from 'node:fs';
 
 const LIBRARY_FILEPATH = path.join(
     process.cwd(),
@@ -10,6 +10,6 @@ const LIBRARY_FILEPATH = path.join(
     'data.json'
 );
 
-export const libraryData:ILibrary = JSON.parse(
+export const libraryData: ILibrary = JSON.parse(
     fs.readFileSync(LIBRARY_FILEPATH, 'utf-8')
 );
