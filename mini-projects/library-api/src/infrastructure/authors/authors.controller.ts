@@ -5,7 +5,8 @@ import {
     Put,
     Delete,
     Param,
-    Body
+    Body,
+    ValidationPipe
 } from '@nestjs/common';
 import { UpdateAuthorDto, CreateAuthorDto } from './dto/authors.dto';
 import { AuthorsService } from './authors.service';
@@ -25,12 +26,15 @@ export class AuthorsController {
     }
 
     @Post()
-    createAuthor(@Body() createAuthorDto: CreateAuthorDto) {
+    createAuthor(@Body(new ValidationPipe()) createAuthorDto: CreateAuthorDto) {
         return this.authorsService.createAuthor(createAuthorDto);
     }
 
-    @Put()
-    updateAuthor(@Body() id: string, updateAuthorDto: UpdateAuthorDto) {
+    @Put(':id')
+    updateAuthor(
+        @Param('id') id: string,
+        @Body(new ValidationPipe()) updateAuthorDto: UpdateAuthorDto
+    ) {
         return this.authorsService.updateAuthor(id, updateAuthorDto);
     }
 

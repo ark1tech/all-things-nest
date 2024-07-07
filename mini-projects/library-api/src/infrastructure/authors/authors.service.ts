@@ -1,29 +1,29 @@
 import { Injectable } from '@nestjs/common';
 
-import { DatabaseService } from 'src/database/database.service';
+import { AuthorsDatabaseService } from 'src/database/authors-database.service';
 import { UpdateAuthorDto, CreateAuthorDto } from './dto/authors.dto';
 
 @Injectable()
 export class AuthorsService {
-    constructor(private databaseService: DatabaseService) {}
+    constructor(private authorsDatabaseService: AuthorsDatabaseService) {}
 
     getAllAuthors() {
-        return this.databaseService.getAllAuthors();
+        return this.authorsDatabaseService.getAllAuthors();
     }
 
     getAuthor(id: string) {
-        return this.databaseService.getAuthor(id);
+        return this.authorsDatabaseService.getAuthor(id);
     }
 
     createAuthor(createAuthorDto: CreateAuthorDto) {
-        return this.databaseService.createAuthor(createAuthorDto);
+        return this.authorsDatabaseService.createAuthor(createAuthorDto);
     }
 
     updateAuthor(id: string, updateAuthorDto: UpdateAuthorDto) {
-        return this.databaseService.updateAuthor(id, updateAuthorDto);
+        return this.authorsDatabaseService.updateAuthor(id, updateAuthorDto);
     }
 
     deleteAuthor(id: string) {
-        return this.databaseService.deleteAuthor(id);
+        return this.authorsDatabaseService.deleteAuthor(id);
     }
 }

@@ -1,5 +1,11 @@
-import { IsString, IsNotEmpty, Validate, ArrayMinSize } from 'class-validator';
-import { PartialType } from '@nestjs/swagger'
+import {
+    IsString,
+    IsNotEmpty,
+    Validate,
+    ArrayMinSize,
+    ValidationArguments
+} from 'class-validator';
+import { PartialType } from '@nestjs/swagger';
 import { AuthorContactFormat } from './AuthorContactFormat';
 
 export class CreateAuthorDto {
@@ -7,34 +13,43 @@ export class CreateAuthorDto {
         message: 'Name cannot be empty.'
     })
     @IsString({
-        message: 'Name has to be a string. Check your input ($value) again.'
+        message: (args: ValidationArguments) =>
+            `Name has to be a string, but was given ${args.value}.`
     })
-    name: string;
+    readonly name: string;
 
     @IsNotEmpty({
         message: 'Name cannot be empty.'
     })
     @IsString({
-        message: 'Name has to be a string. Check your input ($value) again.'
+        message: (args: ValidationArguments) =>
+            `Name has to be a string, but was given ${args.value}.`
     })
     @Validate(AuthorContactFormat, {
-        message:
-            'Contact number of the author must start with a plus (+) sign followed by five numbers.'
+        message: (args: ValidationArguments) =>
+            `Contact number of the author must start with a plus (+) sign followed by five numbers, but was given ${args.value}.`
     })
-    contact: string;
+    readonly contact: string;
 
     @ArrayMinSize(1, {
-        message: 'Book cannot be empty.'
+        message: 'Book cannot be an empty array.'
     })
     @IsString({
         each: true,
-        message: 'Book/s has to be a string. Check your input ($value) again.'
+        message: (args: ValidationArguments) =>
+            `Books have to be an array of string, but was given [${args.value}].`
     })
     @IsNotEmpty({
         each: true,
-        message: 'Book/s has to be nonempty. Check your input ($value) again.'
+        message: (args: ValidationArguments) =>
+            `Book has to be nonempty, but was given [${args.value}].`
     })
-    books: string[];
+    // @IsUUID(5, {
+    //     each: true,
+    //     message: (args: ValidationArguments) =>
+    //         `Book ID has to be of the UUID v5 form, but was given [${args.value}].`
+    // })
+    readonly books: string[];
 }
 
 export class UpdateAuthorDto extends PartialType(CreateAuthorDto) {}
