@@ -6,4 +6,3 @@ export interface IAuthor {
     contact: string;
     books: IBook['id'][];
 }
-

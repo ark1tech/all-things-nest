@@ -24,19 +24,18 @@ export class DatabaseService {
         return this.authors.find((author: IAuthor) => author.id === id);
     }
 
-    // Books input should have delimiter ;;
     createAuthor(createAuthorDto: CreateAuthorDto) {
-        const { nameInput, booksInput } = createAuthorDto;
+        const authorId = hashName(createAuthorDto.name);
 
-        const authorId = hashName(nameInput);
-        booksInput.forEach((authorBook) =>
+        // Update relation
+        createAuthorDto.books.forEach((authorBook) =>
             this.books.forEach((book) => {
                 if (book.title === authorBook)
-                    book.authors.push(hashName(nameInput));
+                    book.authors.push(hashName(createAuthorDto.name));
             })
         );
 
-        const newAuthor = {
+        const newAuthor: IAuthor = {
             id: authorId,
             ...createAuthorDto
         };
@@ -48,7 +47,7 @@ export class DatabaseService {
     }
 
     updateAuthor(id: string, updateAuthorDto: UpdateAuthorDto) {
-        const { nameInput, booksInput } = updateAuthorDto;
+        const { nameInput, contactInput, booksInput } = updateAuthorDto;
 
         this.authors = this.authors.map((author) => {
             if (author.id === id) {

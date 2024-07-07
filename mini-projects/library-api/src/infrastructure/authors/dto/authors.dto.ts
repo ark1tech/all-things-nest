@@ -1,4 +1,5 @@
 import { IsString, IsNotEmpty, Validate, ArrayMinSize } from 'class-validator';
+import { PartialType } from '@nestjs/swagger'
 import { AuthorContactFormat } from './AuthorContactFormat';
 
 export class CreateAuthorDto {
@@ -8,7 +9,7 @@ export class CreateAuthorDto {
     @IsString({
         message: 'Name has to be a string. Check your input ($value) again.'
     })
-    nameInput: string;
+    name: string;
 
     @IsNotEmpty({
         message: 'Name cannot be empty.'
@@ -20,7 +21,7 @@ export class CreateAuthorDto {
         message:
             'Contact number of the author must start with a plus (+) sign followed by five numbers.'
     })
-    contactInput: string;
+    contact: string;
 
     @ArrayMinSize(1, {
         message: 'Book cannot be empty.'
@@ -33,7 +34,7 @@ export class CreateAuthorDto {
         each: true,
         message: 'Book/s has to be nonempty. Check your input ($value) again.'
     })
-    booksInput: string[];
+    books: string[];
 }
 
-export class UpdateAuthorDto {}
+export class UpdateAuthorDto extends PartialType(CreateAuthorDto) {}
