@@ -1,17 +1,17 @@
 import { IBook } from './../infrastructure/books/interfaces/book.interface';
 import { IAuthor } from './../infrastructure/authors/interfaces/author.interface';
 import { Injectable } from '@nestjs/common';
-import { CreateAuthorDto } from 'src/infrastructure/authors/dto/authors.dto';
-import { CreateBookDto } from 'src/infrastructure/books/dto/books.dto';
-import { hashName } from 'src/utils/hasher';
-
-import * as libraryData from './data/data.json';
+import {
+    CreateAuthorDto,
+    UpdateAuthorDto
+} from 'src/infrastructure/authors/dto/authors.dto';
+import { hashName } from 'src/utils/hashNameToID';
+import { libraryData } from 'src/utils/fetchLocalData';
 
 @Injectable()
 export class DatabaseService {
     private authors: IAuthor[] = libraryData.authorList;
     private books: IBook[] = libraryData.bookList;
-
 
     // * Author methods *
 
@@ -23,8 +23,7 @@ export class DatabaseService {
         return this.authors.find((author: IAuthor) => author.id === id);
     }
 
-    // Updates Books memories
-    // Books input should be separated by ;;
+    // Books input should have delimiter ;;
     createAuthor(createAuthorDto: CreateAuthorDto) {
         const { nameInput, booksInput } = createAuthorDto;
 
@@ -54,8 +53,19 @@ export class DatabaseService {
         return newAuthor;
     }
 
+    updateAuthor(id: string, updateAuthorDto: UpdateAuthorDto) {
+        const { nameInput, booksInput } = updateAuthorDto;
+
+        this.authors = this.authors.map((author) => {
+            if (author.id === id) {
+                nameInput ? (author.name = nameInput) : '';
+                booksInput ? (author.books = booksInput) : '';
+            }
+        });
+    }
+
     deleteAuthor(id: string) {
-        const authorToDelete = this.authors.find((author) => author.id === id);
+        const authorToDelete = this.getAuthor(id);
         this.authors = this.authors.filter(
             (author) => author !== authorToDelete
         );
@@ -65,6 +75,4 @@ export class DatabaseService {
     }
 
     // * Book methods *
-
-
 }
