@@ -1,72 +1,70 @@
 {
     "authorList": [
         {
-            "id": "5ca116bc-2b7a-52e0-a7ba-880abef936c0",
+            "id": "6f5230cf-c5a3-59eb-bf44-54623ba4a9cc",
             "name": "J.K. Rowling",
             "contact": "+63100",
             "books": [
-                "11490900-577e-53ff-a776-83bd818d007b",
-                "8f5985ae-274e-5977-82a1-8ca60bca03d9"
+                "8336bf42-5657-54cc-ba0e-83583e81df38",
+                "9fa4f1c3-b903-5335-a610-71ab63275bc0"
             ]
         },
         {
-            "id": "da5a20c0-1882-5b5a-ac96-77e4ef4a56de",
+            "id": "b3771c5f-4c15-5a9c-88a9-ba55393b944c",
             "name": "J.R.R. Tolkien",
             "contact": "+63101",
             "books": [
-                "2599d4f1-56cd-5968-aec0-548f9e612356",
-                "e068303c-6559-5de1-8bd0-d00d28de5b43"
+                "d9893c5d-5f59-5370-ae8d-4339c4017b3e",
+                "8d853a7a-e53b-59d1-9aab-290e48177c86"
             ]
         },
         {
-            "id": "627012a8-11f0-534c-ba7b-b4e57ba29a5f",
+            "id": "a34d9b7d-f651-5cc8-bfb3-3d42fd582542",
             "name": "George R.R. Martin",
             "contact": "+63102",
             "books": [
-                "b5b70b08-e68f-5b46-983a-753f57bdfe70",
-                "e068303c-6559-5de1-8bd0-d00d28de5b43"
+                "1bb19d89-569e-5f66-9bbb-8d4c377848f4",
+                "8d853a7a-e53b-59d1-9aab-290e48177c86"
             ]
         },
         {
-            "id": "d1f205a4-b33b-56e8-bbcd-c5e5ff88a39d",
+            "id": "6de84d91-13ad-506e-a75c-624d15b7a919",
             "name": "Neil Gaiman",
             "contact": "+63103",
-            "books": ["e068303c-6559-5de1-8bd0-d00d28de5b43"]
+            "books": [
+                "e068303c-6559-5de1-8bd0-d00d28de5b43",
+                "8336bf42-5657-54cc-ba0e-83583e81df38"
+            ]
         }
     ],
     "bookList": [
         {
-            "id": "11490900-577e-53ff-a776-83bd818d007b",
+            "id": "8336bf42-5657-54cc-ba0e-83583e81df38",
             "title": "Harry Potter and the Philosopher's Stone",
-            "published_year": 1997,
-            "authors": ["5ca116bc-2b7a-52e0-a7ba-880abef936c0"]
+            "authors": ["6f5230cf-c5a3-59eb-bf44-54623ba4a9cc"]
         },
         {
-            "id": "2599d4f1-56cd-5968-aec0-548f9e612356",
+            "id": "d9893c5d-5f59-5370-ae8d-4339c4017b3e",
             "title": "The Hobbit",
-            "published_year": 1937,
-            "authors": ["da5a20c0-1882-5b5a-ac96-77e4ef4a56de"]
+            "authors": ["b3771c5f-4c15-5a9c-88a9-ba55393b944c"]
         },
         {
-            "id": "b5b70b08-e68f-5b46-983a-753f57bdfe70",
-            "title": "A Game of Thrones",
-            "published_year": 1996,
-            "authors": ["627012a8-11f0-534c-ba7b-b4e57ba29a5f"]
+            "id": "1bb19d89-569e-5f66-9bbb-8d4c377848f4",
+            "title": "Game of Thrones",
+            "authors": ["a34d9b7d-f651-5cc8-bfb3-3d42fd582542"]
         },
         {
-            "id": "8f5985ae-274e-5977-82a1-8ca60bca03d9",
+            "id": "9fa4f1c3-b903-5335-a610-71ab63275bc0",
             "title": "Harry Potter and the Chamber of Secrets",
-            "published_year": 1998,
-            "authors": ["5ca116bc-2b7a-52e0-a7ba-880abef936c0"]
+            "authors": ["6f5230cf-c5a3-59eb-bf44-54623ba4a9cc"]
         },
         {
-            "id": "e068303c-6559-5de1-8bd0-d00d28de5b43",
+            "id": "8d853a7a-e53b-59d1-9aab-290e48177c86",
             "title": "Good Omens",
-            "published_year": 1990,
             "authors": [
-                "da5a20c0-1882-5b5a-ac96-77e4ef4a56de",
-                "627012a8-11f0-534c-ba7b-b4e57ba29a5f",
-                "d1f205a4-b33b-56e8-bbcd-c5e5ff88a39d"
+                "b3771c5f-4c15-5a9c-88a9-ba55393b944c",
+                "a34d9b7d-f651-5cc8-bfb3-3d42fd582542",
+                "6de84d91-13ad-506e-a75c-624d15b7a919"
             ]
         }
     ]

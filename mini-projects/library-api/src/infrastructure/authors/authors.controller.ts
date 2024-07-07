@@ -6,6 +6,7 @@ import {
     Delete,
     Param,
     Body,
+    ParseUUIDPipe,
     ValidationPipe
 } from '@nestjs/common';
 import { UpdateAuthorDto, CreateAuthorDto } from './dto/authors.dto';
@@ -21,7 +22,7 @@ export class AuthorsController {
     }
 
     @Get(':id')
-    getAuthor(@Param('id') id: string) {
+    getAuthor(@Param('id', new ParseUUIDPipe()) id: string) {
         return this.authorsService.getAuthor(id);
     }
 
@@ -32,14 +33,14 @@ export class AuthorsController {
 
     @Put(':id')
     updateAuthor(
-        @Param('id') id: string,
+        @Param('id', new ParseUUIDPipe()) id: string,
         @Body(new ValidationPipe()) updateAuthorDto: UpdateAuthorDto
     ) {
         return this.authorsService.updateAuthor(id, updateAuthorDto);
     }
 
     @Delete(':id')
-    deleteAuthor(@Param('id') id: string) {
+    deleteAuthor(@Param('id', new ParseUUIDPipe()) id: string) {
         return this.authorsService.deleteAuthor(id);
     }
 }

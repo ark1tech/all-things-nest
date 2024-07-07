@@ -15,8 +15,6 @@ export class AuthorsDatabaseService {
     private authors: IAuthor[] = libraryData.authorList;
     private books: IBook[] = libraryData.bookList;
 
-    // * Author methods *
-
     getAllAuthors(): IAuthor[] {
         return this.authors;
     }
@@ -27,6 +25,7 @@ export class AuthorsDatabaseService {
 
     createAuthor(createAuthorDto: CreateAuthorDto) {
         const authorId = hashName(createAuthorDto.name);
+        console.log(authorId, createAuthorDto.name);
 
         // Update relation
         createAuthorDto.books.forEach((authorBook) => {
@@ -98,6 +97,4 @@ export class AuthorsDatabaseService {
         // return authorToDelete;
         return [authorToDelete, ...this.authors, ...this.books];
     }
-
-    // * Book methods *
 }
