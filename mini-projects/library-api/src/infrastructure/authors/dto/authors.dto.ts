@@ -1,5 +1,5 @@
 import { IsString, IsNotEmpty, Validate, ArrayMinSize } from 'class-validator';
-import { AuthorBooksFormat } from './AuthorContactFormat';
+import { AuthorContactFormat } from './AuthorContactFormat';
 
 export class CreateAuthorDto {
     @IsNotEmpty({
@@ -8,10 +8,6 @@ export class CreateAuthorDto {
     @IsString({
         message: 'Name has to be a string. Check your input ($value) again.'
     })
-    // @Validate(AuthorBooksFormat, {
-    //     message:
-    //         'For books more than one, use the delimiter ;; to separate them. Check your input ($value) again.'
-    // })
     nameInput: string;
 
     @IsNotEmpty({
@@ -19,6 +15,10 @@ export class CreateAuthorDto {
     })
     @IsString({
         message: 'Name has to be a string. Check your input ($value) again.'
+    })
+    @Validate(AuthorContactFormat, {
+        message:
+            'Contact number of the author must start with a plus (+) sign followed by five numbers.'
     })
     contactInput: string;
 

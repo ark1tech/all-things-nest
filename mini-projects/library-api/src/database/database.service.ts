@@ -5,6 +5,7 @@ import {
     CreateAuthorDto,
     UpdateAuthorDto
 } from 'src/infrastructure/authors/dto/authors.dto';
+
 import { hashName } from 'src/utils/hashNameToID';
 import { libraryData } from 'src/utils/fetchLocalData';
 
@@ -27,14 +28,8 @@ export class DatabaseService {
     createAuthor(createAuthorDto: CreateAuthorDto) {
         const { nameInput, booksInput } = createAuthorDto;
 
-        // Create a UUID
         const authorId = hashName(nameInput);
-
-        // Update the authors array in books
-        const authorBookArray = booksInput
-            .split(';;')
-            .map((book) => book.trim());
-        authorBookArray.forEach((authorBook) =>
+        booksInput.forEach((authorBook) =>
             this.books.forEach((book) => {
                 if (book.title === authorBook)
                     book.authors.push(hashName(nameInput));
@@ -43,8 +38,7 @@ export class DatabaseService {
 
         const newAuthor = {
             id: authorId,
-            name: nameInput,
-            books: authorBookArray
+            ...createAuthorDto
         };
 
         this.authors.push(newAuthor);
