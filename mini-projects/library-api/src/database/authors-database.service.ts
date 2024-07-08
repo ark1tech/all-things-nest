@@ -1,10 +1,10 @@
-import { IBook } from '../infrastructure/books/interfaces/book.interface';
-import { IAuthor } from '../infrastructure/authors/interfaces/author.interface';
+import { IBook } from '../infrastructure/submodules/books/interfaces/book.interface';
+import { IAuthor } from '../infrastructure/submodules/authors/interfaces/author.interface';
 import { Injectable } from '@nestjs/common';
 import {
     CreateAuthorDto,
     UpdateAuthorDto
-} from 'src/infrastructure/authors/dto/authors.dto';
+} from 'src/infrastructure/submodules/authors/dto/authors.dto';
 
 import { hashName, hashArrayName } from 'src/utils/hashNameToID';
 import { libraryData } from 'src/utils/fetchLocalData';
