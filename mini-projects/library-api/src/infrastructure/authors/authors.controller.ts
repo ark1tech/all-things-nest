@@ -28,7 +28,7 @@ export class AuthorsController {
         return this.authorsService.getOneAuthorById(id);
     }
 
-    @Post()
+    @Post('/create')
     createAuthor(@Body(ValidationPipe) createAuthorDto: CreateAuthorDto) {
         return this.authorsService.createAuthor(createAuthorDto);
     }
@@ -41,7 +41,7 @@ export class AuthorsController {
         return this.authorsService.updateOneAuthorById(id, updateAuthorDto);
     }
 
-    @Delete(':id')
+    @Delete('/delete/:id')
     deleteOneAuthorById(
         @Param('id', new EnhancedParseUUIDPipe({ version: '5' })) id: string
     ) {

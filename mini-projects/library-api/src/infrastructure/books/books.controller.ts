@@ -28,7 +28,7 @@ export class BooksController {
         return this.booksService.getOneBookById(id);
     }
 
-    @Post()
+    @Post('/create')
     createBook(@Body(ValidationPipe) createBookDto: CreateBookDto) {
         return this.booksService.createBook(createBookDto);
     }
@@ -41,7 +41,7 @@ export class BooksController {
         return this.booksService.updateOneBookById(id, updateBookDto);
     }
 
-    @Delete(':id')
+    @Delete('/delete/:id')
     deleteOneBookById(
         @Param('id', new EnhancedParseUUIDPipe({ version: '5' })) id: string
     ) {
