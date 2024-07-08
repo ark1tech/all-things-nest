@@ -5,7 +5,7 @@ import {
     ValidationArguments,
     IsOptional,
     IsInt,
-    Length
+    Max
 } from 'class-validator';
 import { PartialType } from '@nestjs/swagger';
 
@@ -27,9 +27,9 @@ export class CreateBookDto {
         message: (args: ValidationArguments) =>
             `Published year has to be an integer, but was given ${args.value}.`
     })
-    @Length(1, 4, {
+    @Max(new Date().getFullYear(), {
         message: (args: ValidationArguments) =>
-            `Published year has to have a length of 1 to 4, but was given ${args.value}.`
+            `Published year cannot surpass the current year (${new Date().getFullYear()}), but was given ${args.value}.`
     })
     readonly published_year: number;
 
