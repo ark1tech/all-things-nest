@@ -6,6 +6,7 @@ import { HttpExceptionFilter } from './infrastructure/common/filters/http-except
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
     app.useGlobalPipes(
+        // Validation so that props in the body unrecognized by the DTO throw an error
         new ValidationPipe({
             whitelist: true,
             forbidNonWhitelisted: true,

@@ -8,7 +8,7 @@ import {
     Body,
     ValidationPipe
 } from '@nestjs/common';
-import { EnhancedParseUUIDPipe } from '../../common/pipes/EnhancedParseUUIDPipe';
+import { EnhancedParseUUIDPipe } from '../../common/pipes/custom-uuid.pipe';
 import { UpdateBookDto, CreateBookDto } from './dto/books.dto';
 import { BooksService } from './books.service';
 
