@@ -6,9 +6,9 @@ import {
     Delete,
     Param,
     Body,
-    ParseUUIDPipe,
     ValidationPipe
 } from '@nestjs/common';
+import { EnhancedParseUUIDPipe } from './../../utils/custom-pipes/custom-uuid.pipe';
 import { UpdateAuthorDto, CreateAuthorDto } from './dto/authors.dto';
 import { AuthorsService } from './authors.service';
 
@@ -22,8 +22,10 @@ export class AuthorsController {
     }
 
     @Get(':id')
-    getAuthor(@Param('id', new ParseUUIDPipe()) id: string) {
-        return this.authorsService.getAuthor(id);
+    getOneAuthorById(
+        @Param('id', new EnhancedParseUUIDPipe({ version: '5' })) id: string
+    ) {
+        return this.authorsService.getOneAuthorById(id);
     }
 
     @Post()
@@ -32,15 +34,17 @@ export class AuthorsController {
     }
 
     @Put(':id')
-    updateAuthor(
-        @Param('id', new ParseUUIDPipe()) id: string,
+    updateOneAuthorById(
+        @Param('id', new EnhancedParseUUIDPipe({ version: '5' })) id: string,
         @Body(new ValidationPipe()) updateAuthorDto: UpdateAuthorDto
     ) {
-        return this.authorsService.updateAuthor(id, updateAuthorDto);
+        return this.authorsService.updateOneAuthorById(id, updateAuthorDto);
     }
 
     @Delete(':id')
-    deleteAuthor(@Param('id', new ParseUUIDPipe()) id: string) {
-        return this.authorsService.deleteAuthor(id);
+    deleteOneAuthorById(
+        @Param('id', new EnhancedParseUUIDPipe({ version: '5' })) id: string
+    ) {
+        return this.authorsService.deleteOneAuthorById(id);
     }
 }

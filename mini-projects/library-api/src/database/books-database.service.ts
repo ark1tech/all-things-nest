@@ -2,11 +2,11 @@ import { IBook } from '../infrastructure/books/interfaces/book.interface';
 import { IAuthor } from '../infrastructure/authors/interfaces/author.interface';
 import { Injectable } from '@nestjs/common';
 import {
-    CreateAuthorDto,
-    UpdateAuthorDto
-} from 'src/infrastructure/authors/dto/authors.dto';
+    CreateBookDto,
+    UpdateBookDto
+} from 'src/infrastructure/books/dto/books.dto';
 
-import { hashName } from 'src/utils/hashNameToID';
+import { hashName, hashArrayName } from 'src/utils/hashNameToID';
 import { libraryData } from 'src/utils/fetchLocalData';
 import { toTitleCase } from 'src/utils/makeTitleCase';
 
@@ -15,89 +15,79 @@ export class BooksDatabaseService {
     private authors: IAuthor[] = libraryData.authorList;
     private books: IBook[] = libraryData.bookList;
 
-    // * Author methods *
-
-    getAllAuthors(): IAuthor[] {
-        return this.authors;
+    getAllBooks(): IBook[] {
+        return this.books;
     }
 
-    getAuthor(id: string) {
-        return this.authors.find((author: IAuthor) => author.id === id);
+    getOneBookById(id: string) {
+        return this.books.find((book: IBook) => book.id === id);
     }
 
-    createAuthor(createAuthorDto: CreateAuthorDto) {
-        const authorId = hashName(createAuthorDto.name);
+    createBook(createBookDto: CreateBookDto) {
+        const bookId = hashName(createBookDto.title);
+        const bookPublishYear = createBookDto.published_year || null;
 
-        // Update relation
-        createAuthorDto.books.forEach((authorBook) => {
-            let isBookRecorded = false;
-            this.books.forEach((book) => {
-                if (
-                    book.title.trim().toLowerCase() ===
-                    authorBook.trim().toLowerCase()
-                ) {
-                    book.authors.push(hashName(createAuthorDto.name));
-                    isBookRecorded = true;
+        const newBook: IBook = {
+            id: bookId,
+            title: toTitleCase(createBookDto.title),
+            published_year: bookPublishYear,
+            authors: hashArrayName(createBookDto.authors)
+        };
+        this.books.push(newBook);
+
+        // Update relationship of authors and books
+        createBookDto.authors.forEach((bookAuthor) => {
+            let isAuthorRecorded = false;
+            this.authors.forEach((author) => {
+                if (author.id === hashName(bookAuthor)) {
+                    author.books.push(bookId);
+                    isAuthorRecorded = true;
                 }
             });
 
-            // TODO : Make this a createBook method
-            if (!isBookRecorded) {
-                this.books.push({
-                    id: hashName(authorBook),
-                    title: toTitleCase(authorBook),
-                    authors: [authorId]
+            if (!isAuthorRecorded) {
+                this.authors.push({
+                    id: hashName(bookAuthor),
+                    name: toTitleCase(bookAuthor),
+                    books: [bookId]
                 });
             }
-            // console.log(JSON.stringify(this.books, null, 2));
         });
-
-        const newAuthor: IAuthor = {
-            id: authorId,
-            ...createAuthorDto
-        };
-
-        newAuthor.books = newAuthor.books.map((book) => hashName(book));
-
-        this.authors.push(newAuthor);
 
         // For debugging
-        return newAuthor;
+        return newBook;
     }
 
-    updateAuthor(id: string, updateAuthorDto: UpdateAuthorDto) {
-        const { name, contact, books } = updateAuthorDto;
+    updateOneBookById(id: string, updateBookDto: UpdateBookDto) {
+        const { title, published_year, authors } = updateBookDto;
 
-        this.authors = this.authors.map((author) => {
-            if (author.id === id) {
-                if (name) {
-                    author.name = name;
-                    author.id = hashName(name);
+        this.books = this.books.map((book) => {
+            if (book.id === id) {
+                if (title) {
+                    book.title = toTitleCase(title);
+                    book.id = hashName(title);
                 }
-                if (contact) author.contact = contact;
-                if (books) author.books = books;
+                if (published_year) book.published_year = published_year;
+                if (authors) book.authors = hashArrayName(authors);
             }
-            // console.log(JSON.stringify(this.books, null, 2));
-            return author;
+            return book;
         });
+
+        return this.getOneBookById(id);
     }
 
-    deleteAuthor(id: string) {
-        const authorToDelete = this.getAuthor(id);
-        this.authors = this.authors.filter(
-            (author) => author !== authorToDelete
-        );
-        // Update relation
-        this.books.forEach((book) => {
-            book.authors = book.authors.filter(
-                (author) => author !== authorToDelete.id
+    deleteOneBookById(id: string) {
+        const bookToDelete = this.getOneBookById(id);
+
+        this.books = this.books.filter((book) => book !== bookToDelete);
+
+        // Update relationship of authors and books
+        this.authors.forEach((author) => {
+            author.books = author.books.filter(
+                (book) => book !== bookToDelete.id
             );
         });
 
-        // For debugging
-        // return authorToDelete;
-        return [authorToDelete, ...this.authors, ...this.books];
+        return bookToDelete;
     }
-
-    // * Book methods *
 }

@@ -6,7 +6,7 @@ import {
     UpdateAuthorDto
 } from 'src/infrastructure/authors/dto/authors.dto';
 
-import { hashName } from 'src/utils/hashNameToID';
+import { hashName, hashArrayName } from 'src/utils/hashNameToID';
 import { libraryData } from 'src/utils/fetchLocalData';
 import { toTitleCase } from 'src/utils/makeTitleCase';
 
@@ -19,28 +19,31 @@ export class AuthorsDatabaseService {
         return this.authors;
     }
 
-    getAuthor(id: string) {
+    getOneAuthorById(id: string) {
         return this.authors.find((author: IAuthor) => author.id === id);
     }
 
     createAuthor(createAuthorDto: CreateAuthorDto) {
         const authorId = hashName(createAuthorDto.name);
-        console.log(authorId, createAuthorDto.name);
+        const authorContact = createAuthorDto.contact || null;
 
-        // Update relation
+        const newAuthor: IAuthor = {
+            id: authorId,
+            contact: authorContact,
+            name: toTitleCase(createAuthorDto.name),
+            books: hashArrayName(createAuthorDto.books)
+        };
+        this.authors.push(newAuthor);
+
+        // Update relationship of authors and books
         createAuthorDto.books.forEach((authorBook) => {
             let isBookRecorded = false;
             this.books.forEach((book) => {
-                if (
-                    book.title.trim().toLowerCase() ===
-                    authorBook.trim().toLowerCase()
-                ) {
-                    book.authors.push(hashName(createAuthorDto.name));
+                if (book.id === hashName(authorBook)) {
+                    book.authors.push(authorId);
                     isBookRecorded = true;
                 }
             });
-
-            // TODO : Make this a createBook method
             if (!isBookRecorded) {
                 this.books.push({
                     id: hashName(authorBook),
@@ -51,50 +54,41 @@ export class AuthorsDatabaseService {
             // console.log(JSON.stringify(this.books, null, 2));
         });
 
-        const newAuthor: IAuthor = {
-            id: authorId,
-            ...createAuthorDto
-        };
-
-        newAuthor.books = newAuthor.books.map((book) => hashName(book));
-
-        this.authors.push(newAuthor);
-
-        // For debugging
         return newAuthor;
     }
 
-    updateAuthor(id: string, updateAuthorDto: UpdateAuthorDto) {
+    updateOneAuthorById(id: string, updateAuthorDto: UpdateAuthorDto) {
         const { name, contact, books } = updateAuthorDto;
 
         this.authors = this.authors.map((author) => {
             if (author.id === id) {
                 if (name) {
-                    author.name = name;
+                    author.name = toTitleCase(name);
                     author.id = hashName(name);
                 }
                 if (contact) author.contact = contact;
-                if (books) author.books = books;
+                if (books) author.books = hashArrayName(books);
             }
-            // console.log(JSON.stringify(this.books, null, 2));
             return author;
         });
+
+        return this.getOneAuthorById(id);
     }
 
-    deleteAuthor(id: string) {
-        const authorToDelete = this.getAuthor(id);
+    deleteOneAuthorById(id: string) {
+        const authorToDelete = this.deleteOneAuthorById(id);
+
         this.authors = this.authors.filter(
             (author) => author !== authorToDelete
         );
-        // Update relation
+
+        // Update relationship of authors and books
         this.books.forEach((book) => {
             book.authors = book.authors.filter(
                 (author) => author !== authorToDelete.id
             );
         });
 
-        // For debugging
-        // return authorToDelete;
-        return [authorToDelete, ...this.authors, ...this.books];
+        return authorToDelete;
     }
 }

@@ -1,3 +1,4 @@
+import { hashName } from 'src/utils/hashNameToID';
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { AuthorsDatabaseService } from 'src/database/authors-database.service';
@@ -11,8 +12,8 @@ export class AuthorsService {
         return this.authorsDatabaseService.getAllAuthors();
     }
 
-    getAuthor(id: string) {
-        const author = this.authorsDatabaseService.getAuthor(id);
+    getOneAuthorById(id: string) {
+        const author = this.authorsDatabaseService.getOneAuthorById(id);
         if (!author) {
             throw new NotFoundException(`Author ID ${id} was not found!`);
         }
@@ -20,16 +21,23 @@ export class AuthorsService {
     }
 
     createAuthor(createAuthorDto: CreateAuthorDto) {
+        const authorIdToCreate = hashName(createAuthorDto.name);
+        const author = this.authorsDatabaseService.getOneAuthorById(authorIdToCreate);
+        if (author) {
+            throw new NotFoundException(
+                `Author ${createAuthorDto.name} already exists!`
+            );
+        }
         return this.authorsDatabaseService.createAuthor(createAuthorDto);
     }
 
-    updateAuthor(id: string, updateAuthorDto: UpdateAuthorDto) {
-        this.getAuthor(id);
-        return this.authorsDatabaseService.updateAuthor(id, updateAuthorDto);
+    updateOneAuthorById(id: string, updateAuthorDto: UpdateAuthorDto) {
+        this.getOneAuthorById(id);
+        return this.authorsDatabaseService.updateOneAuthorById(id, updateAuthorDto);
     }
 
-    deleteAuthor(id: string) {
-        this.getAuthor(id);
-        return this.authorsDatabaseService.deleteAuthor(id);
+    deleteOneAuthorById(id: string) {
+        this.getOneAuthorById(id);
+        return this.authorsDatabaseService.deleteOneAuthorById(id);
     }
 }
