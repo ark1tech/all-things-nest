@@ -21,7 +21,8 @@ export class CreateAuthorDto {
 
     @IsOptional()
     @IsNotEmpty({
-        message: 'Contact cannot be empty.'
+        message: 'Contact cannot be empty.',
+        
     })
     @IsString({
         message: (args: ValidationArguments) =>

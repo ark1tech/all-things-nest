@@ -8,7 +8,7 @@ import {
     Body,
     ValidationPipe
 } from '@nestjs/common';
-import { EnhancedParseUUIDPipe } from './../../utils/custom-pipes/custom-uuid.pipe';
+import { EnhancedParseUUIDPipe } from '../../error-handling/pipes/EnhancedParseUUIDPipe';
 import { UpdateAuthorDto, CreateAuthorDto } from './dto/authors.dto';
 import { AuthorsService } from './authors.service';
 
@@ -29,14 +29,14 @@ export class AuthorsController {
     }
 
     @Post()
-    createAuthor(@Body(new ValidationPipe()) createAuthorDto: CreateAuthorDto) {
+    createAuthor(@Body(ValidationPipe) createAuthorDto: CreateAuthorDto) {
         return this.authorsService.createAuthor(createAuthorDto);
     }
 
     @Put(':id')
     updateOneAuthorById(
         @Param('id', new EnhancedParseUUIDPipe({ version: '5' })) id: string,
-        @Body(new ValidationPipe()) updateAuthorDto: UpdateAuthorDto
+        @Body(ValidationPipe) updateAuthorDto: UpdateAuthorDto
     ) {
         return this.authorsService.updateOneAuthorById(id, updateAuthorDto);
     }

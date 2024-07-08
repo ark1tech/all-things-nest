@@ -1,5 +1,9 @@
 import { hashName } from 'src/utils/hashNameToID';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+    Injectable,
+    NotFoundException,
+    UnprocessableEntityException
+} from '@nestjs/common';
 
 import { BooksDatabaseService } from 'src/database/books-database.service';
 import { UpdateBookDto, CreateBookDto } from './dto/books.dto';
@@ -24,7 +28,7 @@ export class BooksService {
         const bookIdToCreate = hashName(createBookDto.title);
         const author = this.booksDatabaseService.getOneBookById(bookIdToCreate);
         if (author) {
-            throw new NotFoundException(
+            throw new UnprocessableEntityException(
                 `Book ${createBookDto.title} already exists!`
             );
         }

@@ -1,5 +1,9 @@
 import { hashName } from 'src/utils/hashNameToID';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+    Injectable,
+    NotFoundException,
+    UnprocessableEntityException
+} from '@nestjs/common';
 
 import { AuthorsDatabaseService } from 'src/database/authors-database.service';
 import { UpdateAuthorDto, CreateAuthorDto } from './dto/authors.dto';
@@ -22,9 +26,10 @@ export class AuthorsService {
 
     createAuthor(createAuthorDto: CreateAuthorDto) {
         const authorIdToCreate = hashName(createAuthorDto.name);
-        const author = this.authorsDatabaseService.getOneAuthorById(authorIdToCreate);
+        const author =
+            this.authorsDatabaseService.getOneAuthorById(authorIdToCreate);
         if (author) {
-            throw new NotFoundException(
+            throw new UnprocessableEntityException(
                 `Author ${createAuthorDto.name} already exists!`
             );
         }
@@ -33,7 +38,10 @@ export class AuthorsService {
 
     updateOneAuthorById(id: string, updateAuthorDto: UpdateAuthorDto) {
         this.getOneAuthorById(id);
-        return this.authorsDatabaseService.updateOneAuthorById(id, updateAuthorDto);
+        return this.authorsDatabaseService.updateOneAuthorById(
+            id,
+            updateAuthorDto
+        );
     }
 
     deleteOneAuthorById(id: string) {

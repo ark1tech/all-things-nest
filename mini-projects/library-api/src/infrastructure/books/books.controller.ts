@@ -8,7 +8,7 @@ import {
     Body,
     ValidationPipe
 } from '@nestjs/common';
-import { EnhancedParseUUIDPipe } from './../../utils/custom-pipes/custom-uuid.pipe';
+import { EnhancedParseUUIDPipe } from '../../error-handling/pipes/EnhancedParseUUIDPipe';
 import { UpdateBookDto, CreateBookDto } from './dto/books.dto';
 import { BooksService } from './books.service';
 
@@ -29,14 +29,14 @@ export class BooksController {
     }
 
     @Post()
-    createBook(@Body(new ValidationPipe()) createBookDto: CreateBookDto) {
+    createBook(@Body(ValidationPipe) createBookDto: CreateBookDto) {
         return this.booksService.createBook(createBookDto);
     }
 
     @Put(':id')
     updateOneBookById(
         @Param('id', new EnhancedParseUUIDPipe({ version: '5' })) id: string,
-        @Body(new ValidationPipe()) updateBookDto: UpdateBookDto
+        @Body(ValidationPipe) updateBookDto: UpdateBookDto
     ) {
         return this.booksService.updateOneBookById(id, updateBookDto);
     }
