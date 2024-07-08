@@ -53,7 +53,6 @@ export class BooksDatabaseService {
                 });
             }
         });
-
         // For debugging
         return newBook;
     }
@@ -72,7 +71,7 @@ export class BooksDatabaseService {
             }
             return book;
         });
-
+        // For debugging
         return this.getOneBookById(id);
     }
 
@@ -87,7 +86,7 @@ export class BooksDatabaseService {
                 (book) => book !== bookToDelete.id
             );
         });
-
+        // For debugging
         return bookToDelete;
     }
 }

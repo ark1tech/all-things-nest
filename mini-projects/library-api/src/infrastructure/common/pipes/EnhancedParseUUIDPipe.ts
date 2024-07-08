@@ -1,5 +1,6 @@
 import { ParseUUIDPipe, Injectable, ArgumentMetadata } from '@nestjs/common';
 
+// The enhancement here is to improve understandability of the UUID error message
 @Injectable()
 export class EnhancedParseUUIDPipe extends ParseUUIDPipe {
     async transform(

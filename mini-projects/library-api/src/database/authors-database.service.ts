@@ -53,7 +53,7 @@ export class AuthorsDatabaseService {
             }
             // console.log(JSON.stringify(this.books, null, 2));
         });
-
+        // For debugging
         return newAuthor;
     }
 
@@ -71,7 +71,7 @@ export class AuthorsDatabaseService {
             }
             return author;
         });
-
+        // For debugging
         return this.getOneAuthorById(id);
     }
 
@@ -88,7 +88,7 @@ export class AuthorsDatabaseService {
                 (author) => author !== authorToDelete.id
             );
         });
-
+        // For debugging
         return authorToDelete;
     }
 }
