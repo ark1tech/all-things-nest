@@ -76,7 +76,7 @@ export class AuthorsDatabaseService {
     }
 
     deleteOneAuthorById(id: string) {
-        const authorToDelete = this.deleteOneAuthorById(id);
+        const authorToDelete = this.getOneAuthorById(id);
 
         this.authors = this.authors.filter(
             (author) => author !== authorToDelete
