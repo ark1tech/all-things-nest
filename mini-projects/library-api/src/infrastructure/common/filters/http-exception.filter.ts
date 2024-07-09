@@ -15,7 +15,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
         const message = exception.getResponse();
         const status = exception.getStatus();
 
-
         /*
 
             TODO : Make this cleaner
@@ -24,21 +23,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
             when exception.getResponse() is an object it would mean that it's an error I've handled already
 
         */
-        if (typeof message === 'string') {
-            response.status(status).json({
-                statusCode: status,
-                message: message,
-                timestamp: new Date().toISOString(),
-                path: request.url
-            });
-        } else if (typeof message === 'object') {
-            response.status(status).json({
-                ...message,
-                ...{
-                    timestamp: new Date().toISOString(),
-                    path: request.url
-                }
-            });
-        }
+        const errorResponse = {
+            timestamp: new Date().toISOString(),
+            path: request.url,
+            statusCode: status,
+            message: typeof message === 'string' ? message : undefined,
+            ...(typeof message === 'object' && message)
+        };
+
+        response.status(status).json(errorResponse);
     }
 }
