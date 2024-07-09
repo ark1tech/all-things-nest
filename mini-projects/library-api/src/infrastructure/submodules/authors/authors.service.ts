@@ -27,10 +27,6 @@ export class AuthorsService {
     createAuthor(createAuthorDto: CreateAuthorDto) {
         const authorIdToCreate = hashName(createAuthorDto.name);
 
-        /*
-            TODO: Make this cleaner as well as that of the book service
-            For now, idk how to generalize these into a provider-level filter
-        */
         const author =
             this.authorsDatabaseService.getOneAuthorById(authorIdToCreate);
         if (author) {
