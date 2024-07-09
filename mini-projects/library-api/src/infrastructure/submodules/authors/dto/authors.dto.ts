@@ -7,7 +7,7 @@ import {
     ValidationArguments
 } from 'class-validator';
 import { PartialType } from '@nestjs/swagger';
-import { AuthorContactFormat } from './author-contact.validator';
+import { AuthorContactFormat } from '../validator/author-contact.validator';
 
 export class CreateAuthorDto {
     @IsNotEmpty({
