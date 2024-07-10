@@ -72,5 +72,39 @@
                 "6de84d91-13ad-506e-a75c-624d15b7a919"
             ]
         }
+    ],
+    "idAuthorBook": [
+        {
+            "bookId": "8336bf42-5657-54cc-ba0e-83583e81df38",
+            "authorId": "6f5230cf-c5a3-59eb-bf44-54623ba4a9cc"
+        },
+        {
+            "bookId": "9fa4f1c3-b903-5335-a610-71ab63275bc0",
+            "authorId": "6f5230cf-c5a3-59eb-bf44-54623ba4a9cc"
+        },
+        {
+            "bookId": "d9893c5d-5f59-5370-ae8d-4339c4017b3e",
+            "authorId": "b3771c5f-4c15-5a9c-88a9-ba55393b944c"
+        },
+        {
+            "bookId": "8d853a7a-e53b-59d1-9aab-290e48177c86",
+            "authorId": "b3771c5f-4c15-5a9c-88a9-ba55393b944c"
+        },
+        {
+            "bookId": "8d853a7a-e53b-59d1-9aab-290e48177c86",
+            "authorId": "a34d9b7d-f651-5cc8-bfb3-3d42fd582542"
+        },
+        {
+            "bookId": "8d853a7a-e53b-59d1-9aab-290e48177c86",
+            "authorId": "6de84d91-13ad-506e-a75c-624d15b7a919"
+        },
+        {
+            "bookId": "1bb19d89-569e-5f66-9bbb-8d4c377848f4",
+            "authorId": "a34d9b7d-f651-5cc8-bfb3-3d42fd582542"
+        },
+        {
+            "bookId": "e068303c-6559-5de1-8bd0-d00d28de5b43",
+            "authorId": "6de84d91-13ad-506e-a75c-624d15b7a919"
+        }
     ]
 }

@@ -38,17 +38,18 @@ export class AuthorsDatabaseService {
         // Update relationship of authors and books
         createAuthorDto.books.forEach((authorBook) => {
             let isBookRecorded = false;
-            this.books.forEach((book) => {
-                if (book.id === hashName(authorBook)) {
-                    book.authors.push(authorId);
-                    isBookRecorded = true;
-                }
-            });
             if (!isBookRecorded) {
                 this.books.push({
                     id: hashName(authorBook),
                     title: toTitleCase(authorBook),
                     authors: [authorId]
+                });
+            } else {
+                this.books.forEach((book) => {
+                    if (book.id === hashName(authorBook)) {
+                        book.authors.push(authorId);
+                        isBookRecorded = true;
+                    }
                 });
             }
             // console.log(JSON.stringify(this.books, null, 2));
