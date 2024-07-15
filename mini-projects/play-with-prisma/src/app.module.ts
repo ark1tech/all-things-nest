@@ -3,7 +3,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { AppController } from './app.controller';
 
 @Module({
-  imports: [PrismaModule],
-  controllers: [AppController],
+    imports: [PrismaModule],
+    controllers: [AppController]
 })
 export class AppModule {}
