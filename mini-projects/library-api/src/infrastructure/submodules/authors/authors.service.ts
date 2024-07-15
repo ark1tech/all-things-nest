@@ -2,7 +2,7 @@ import { hashName } from 'src/utils/hashNameToID';
 import {
     Injectable,
     NotFoundException,
-    UnprocessableEntityException
+    ConflictException
 } from '@nestjs/common';
 
 import { AuthorsDatabaseService } from 'src/database/authors-database.service';
@@ -30,7 +30,7 @@ export class AuthorsService {
         const author =
             this.authorsDatabaseService.getOneAuthorById(authorIdToCreate);
         if (author) {
-            throw new UnprocessableEntityException(
+            throw new ConflictException(
                 `Author ${createAuthorDto.name} already exists!`
             );
         }
@@ -38,11 +38,11 @@ export class AuthorsService {
     }
 
     updateOneAuthorById(id: string, updateAuthorDto: UpdateAuthorDto) {
-        this.getOneAuthorById(id);
-        return this.authorsDatabaseService.updateOneAuthorById(
-            id,
-            updateAuthorDto
-        );
+        const author = this.getOneAuthorById(id);
+        return this.authorsDatabaseService.updateOneAuthorById(id, {
+            ...author,
+            ...updateAuthorDto
+        });
     }
 
     deleteOneAuthorById(id: string) {

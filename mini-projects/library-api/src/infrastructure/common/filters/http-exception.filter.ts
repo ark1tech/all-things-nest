@@ -31,6 +31,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
             ...(typeof message === 'object' && message)
         };
 
+        console.log(exception);
+
         response.status(status).json(errorResponse);
     }
 }

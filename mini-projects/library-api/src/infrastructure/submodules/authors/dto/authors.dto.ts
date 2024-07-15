@@ -17,7 +17,7 @@ export class CreateAuthorDto {
         message: (args: ValidationArguments) =>
             `Name has to be a string, but was given ${args.value}.`
     })
-    readonly name: string;
+    readonly name!: string;
 
     @IsOptional()
     @IsNotEmpty({
@@ -47,7 +47,7 @@ export class CreateAuthorDto {
         message: (args: ValidationArguments) =>
             `Book has to be nonempty, but was given [${args.value}].`
     })
-    readonly books: string[];
+    readonly books!: string[];
 }
 
 export class UpdateAuthorDto extends PartialType(CreateAuthorDto) {}

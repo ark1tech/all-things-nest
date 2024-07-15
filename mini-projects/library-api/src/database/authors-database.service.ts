@@ -62,21 +62,22 @@ export class AuthorsDatabaseService {
         const { name, contact, books } = updateAuthorDto;
 
         this.authors = this.authors.map((author) => {
-            if (author.id === id) {
-                if (name) {
-                    author.name = toTitleCase(name);
-                    author.id = hashName(name);
-                }
-                if (contact) author.contact = contact;
-                if (books) author.books = hashArrayName(books);
+            if (author.id !== id) {
+                return author;
             }
-            return author;
+            return {
+                ...author,
+                name: name ? toTitleCase(name) : author.name,
+                id: name ? hashName(name) : author.name,
+                contact: contact ?? author.contact,
+                books: books ? hashArrayName(books) : author.books
+            };
         });
         // For debugging
         return this.getOneAuthorById(id);
     }
 
-    deleteOneAuthorById(id: string) {
+    async deleteOneAuthorById(id: string) {
         const authorToDelete = this.getOneAuthorById(id);
 
         this.authors = this.authors.filter(
@@ -84,11 +85,19 @@ export class AuthorsDatabaseService {
         );
 
         // Update relationship of authors and books
-        this.books.forEach((book) => {
+        // this.books.forEach((book) => {
+        //     book.authors = book.authors.filter(
+        //         (author) => author !== authorToDelete.id
+        //     );
+        // });
+
+        const promises = this.books.map((book) => {
             book.authors = book.authors.filter(
                 (author) => author !== authorToDelete.id
             );
         });
+        await Promise.all(promises);
+
         // For debugging
         return authorToDelete;
     }

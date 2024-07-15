@@ -31,7 +31,7 @@ export class CreateBookDto {
         message: (args: ValidationArguments) =>
             `Published year cannot surpass the current year (${new Date().getFullYear()}), but was given ${args.value}.`
     })
-    readonly published_year: number;
+    readonly published_year?: number;
 
     @ArrayMinSize(1, {
         message: 'Author cannot be an empty array.'
