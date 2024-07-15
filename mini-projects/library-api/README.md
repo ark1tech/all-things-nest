@@ -25,6 +25,51 @@ The Library API allows you to manage a collection of authors and books. It inclu
 - Creating, updating, retrieving, and deleting books.
 - Managing relationships between authors and books.
 
+## ERD
+
+Here's the Entity-Relationship Diagram for the Library API:
+
+```mermaid
+erDiagram
+    AUTHOR ||--o{ AUTHOR_BOOK : writes
+    BOOK ||--o{ AUTHOR_BOOK : written_by
+    AUTHOR {
+        string id PK
+        string name
+        string contact
+    }
+    BOOK {
+        string id PK
+        string title
+        int published_year
+    }
+    AUTHOR_BOOK {
+        string author_id FK
+        string book_id FK
+    }
+```
+
+This ERD illustrates the relationships between the entities in our Library API:
+
+1. **AUTHOR**: Represents the authors in our system.
+   - `id`: Unique identifier for each author (Primary Key)
+   - `name`: Name of the author
+   - `contact`: Contact information for the author
+
+2. **BOOK**: Represents the books in our system.
+   - `id`: Unique identifier for each book (Primary Key)
+   - `title`: Title of the book
+   - `published_year`: Year the book was published
+
+3. **AUTHOR_BOOK**: Represents the many-to-many relationship between authors and books.
+   - `author_id`: Foreign Key referencing the AUTHOR table
+   - `book_id`: Foreign Key referencing the BOOK table
+
+This design allows for:
+- An author to write multiple books
+- A book to be written by multiple authors
+- Efficient querying of the relationships between authors and books
+
 ## Installation
 
 To install the necessary dependencies, run:
