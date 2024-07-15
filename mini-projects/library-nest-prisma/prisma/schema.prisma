@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Author {
+  id        Int          @id @default(autoincrement())
+  name      String       @unique
+  contact   String?
+  bio       String?
+  published Boolean      @default(false)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  books     BookAuthor[]
+}
+
+model Book {
+  id             Int          @id @default(autoincrement())
+  title          String       @unique
+  published_year Int?
+  bio            String?
+  published      Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  authors        BookAuthor[]
+}
+
+model BookAuthor {
+  author     Author   @relation(fields: [authorId], references: [id])
+  authorId   Int
+  book       Book     @relation(fields: [bookId], references: [id])
+  bookId     Int
+  assignedAt DateTime @default(now())
+
+  // Compound ID
+  @@id([authorId, bookId])
+}
+
+// Migrate the database 
+// `npx prisma migrate dev --name "init"`
