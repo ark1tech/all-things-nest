@@ -4,7 +4,7 @@ import { UpdateAuthorDto } from './dto/update-author.dto';
 import { BookDbPrismaService } from 'src/database-service/prisma/book-db-prisma.service';
 
 @Injectable()
-export class AuthorService {
+export class BookService {
     constructor(private book_db_prisma: BookDbPrismaService) {}
 
     createBook(createAuthorDto: CreateAuthorDto) {
