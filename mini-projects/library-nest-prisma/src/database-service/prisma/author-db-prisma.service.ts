@@ -5,6 +5,6 @@ import { PrismaService } from './prisma.service';
 export class AuthorDbPrismaService {
     constructor(private prisma: PrismaService) {}
 
-    
+    // TODO implement different relational CRUD 
 
 }

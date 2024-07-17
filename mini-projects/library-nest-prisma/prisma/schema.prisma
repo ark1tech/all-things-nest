@@ -16,9 +16,9 @@ datasource db {
 model Author {
   id        Int          @id @default(autoincrement())
   name      String       @unique
-  contact   String?
+  contact   String?      @unique
   bio       String?
-  published Boolean      @default(false)
+  privacy   Privacy      @default(PUBLIC)
   createdAt DateTime     @default(now())
   updatedAt DateTime     @updatedAt
   books     BookAuthor[]
@@ -29,7 +29,7 @@ model Book {
   title          String       @unique
   published_year Int?
   bio            String?
-  published      Boolean      @default(false)
+  privacy        Privacy      @default(PUBLIC)
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
   authors        BookAuthor[]
@@ -44,6 +44,11 @@ model BookAuthor {
 
   // Compound ID
   @@id([authorId, bookId])
+}
+
+enum Privacy {
+  PUBLIC
+  PRIVATE
 }
 
 // Migrate the database 

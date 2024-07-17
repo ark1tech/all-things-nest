@@ -7,23 +7,25 @@ import { AuthorDbPrismaService } from 'src/database-service/prisma/author-db-pri
 export class AuthorService {
     constructor(private author_db_prisma: AuthorDbPrismaService) {}
 
-    createAuthor(createAuthorDto: CreateAuthorDto) {
-        return this.author_db_prisma.createAuthor(createAuthorDto);
+    async createAuthor(createAuthorDto: CreateAuthorDto) {
+        return await this.author_db_prisma.createAuthor(createAuthorDto);
     }
 
-    findAllAuthor() {
-        return this.author_db_prisma.findAllAuthor();
+    async findAllAuthor() {
+        return await this.author_db_prisma.findAllAuthor();
     }
 
-    findOneAuthor(id: number) {
-        return this.author_db_prisma.findOneAuthor();
+    async findOneAuthor(id: number) {
+        return await this.author_db_prisma.findOneAuthor(id);
     }
 
-    updateAuthor(id: number, updateAuthorDto: UpdateAuthorDto) {
-        return this.author_db_prisma.updateAuthor(id, updateAuthorDto);
+    async updateAuthor(id: number, updateAuthorDto: UpdateAuthorDto) {
+        return await this.author_db_prisma.updateAuthor(id, updateAuthorDto);
     }
 
-    removeAuthor(id: number) {
-        return this.author_db_prisma.removeAuthor(id);
+    async removeAuthor(id: number) {
+        return await this.author_db_prisma.removeAuthor(id);
     }
+
+
 }

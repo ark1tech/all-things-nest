@@ -9,18 +9,18 @@ async function main() {
     const author1 = await prisma.author.create({
         data: {
             name: 'J.K. Rowling',
-            contact: 'jk@example.com',
+            contact: '+63412',
             bio: 'British author, best known for the Harry Potter series.',
-            published: true
+            privacy: 'PUBLIC'
         }
     });
 
     const author2 = await prisma.author.create({
         data: {
             name: 'George R.R. Martin',
-            contact: 'grrm@example.com',
+            contact: '+63413',
             bio: 'American novelist and short story writer, best known for A Song of Ice and Fire.',
-            published: true
+            privacy: 'PUBLIC'
         }
     });
 
@@ -30,7 +30,7 @@ async function main() {
             title: "Harry Potter and the Philosopher's Stone",
             published_year: 1997,
             bio: 'The first book in the Harry Potter series.',
-            published: true,
+            privacy: 'PUBLIC',
             authors: {
                 create: {
                     author: {
@@ -46,7 +46,7 @@ async function main() {
             title: 'A Game of Thrones',
             published_year: 1996,
             bio: 'The first novel in A Song of Ice and Fire, an epic fantasy series.',
-            published: true,
+            privacy: 'PUBLIC',
             authors: {
                 create: {
                     author: {

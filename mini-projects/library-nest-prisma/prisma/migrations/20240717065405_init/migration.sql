@@ -1,10 +1,13 @@
+-- CreateEnum
+CREATE TYPE "Privacy" AS ENUM ('PUBLIC', 'PRIVATE');
+
 -- CreateTable
 CREATE TABLE "Author" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "contact" TEXT,
     "bio" TEXT,
-    "published" BOOLEAN NOT NULL DEFAULT false,
+    "privacy" "Privacy" NOT NULL DEFAULT 'PUBLIC',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -17,7 +20,7 @@ CREATE TABLE "Book" (
     "title" TEXT NOT NULL,
     "published_year" INTEGER,
     "bio" TEXT,
-    "published" BOOLEAN NOT NULL DEFAULT false,
+    "privacy" "Privacy" NOT NULL DEFAULT 'PUBLIC',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -37,10 +40,13 @@ CREATE TABLE "BookAuthor" (
 CREATE UNIQUE INDEX "Author_name_key" ON "Author"("name");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Author_contact_key" ON "Author"("contact");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Book_title_key" ON "Book"("title");
 
 -- AddForeignKey
-ALTER TABLE "BookAuthor" ADD CONSTRAINT "BookAuthor_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "Author"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "BookAuthor" ADD CONSTRAINT "BookAuthor_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "Author"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "BookAuthor" ADD CONSTRAINT "BookAuthor_bookId_fkey" FOREIGN KEY ("bookId") REFERENCES "Book"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "BookAuthor" ADD CONSTRAINT "BookAuthor_bookId_fkey" FOREIGN KEY ("bookId") REFERENCES "Book"("id") ON DELETE CASCADE ON UPDATE CASCADE;
